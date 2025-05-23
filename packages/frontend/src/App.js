@@ -25,6 +25,9 @@ const createAppTheme = (isLoggedIn) => {
         default: isLoggedIn ? '#fef3e2' : '#ffffff', // Giriş yapıldıysa açık sarı, değilse beyaz
       }
     },
+    typography: {
+      fontFamily: '"Alata", sans-serif',
+    }
   });
 };
 
@@ -35,14 +38,23 @@ const Layout = ({ children, isAuthenticated }) => {
   
   // Arka plan stili
   const backgroundStyle = {
-    backgroundColor: isAuthenticated ? '#fef3e2' : undefined,
-    backgroundImage: !isAuthenticated && !isLoginPage ? 'none' : 'none', // Arka plan resmini tamamen kaldır
+    backgroundColor: isAuthenticated ? '#fef3e2' : '#ffffff',
+    backgroundImage: 'none', // Arka plan resmini tamamen kaldır
     minHeight: '100vh',
   };
   
   return (
     <Box sx={backgroundStyle}>
-      {!isLoginPage && <Header />}
+      {!isLoginPage && (
+        <Box sx={{ 
+          backgroundColor: '#fef3e2', 
+          padding: '5px 5px 0 5px',
+          position: 'relative',
+          zIndex: 10
+        }}>
+          <Header />
+        </Box>
+      )}
       <Box sx={{ pt: isLoginPage ? 0 : 2 }}>
         {children}
       </Box>
